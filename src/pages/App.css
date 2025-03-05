@@ -29,7 +29,7 @@
   margin: 100px auto;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .login-container h2 {
@@ -51,11 +51,16 @@
 
 .login-container button {
   padding: 10px;
-  background: #007bff;
+  background: #0056B3;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 4px;
+}
+
+.login-container button:hover {
+background-color: rgb(2, 66, 134);
 }
 
 .login-container .error {
@@ -101,7 +106,7 @@
   padding: 1rem 2rem;
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
   position: sticky;
   top: 0;
@@ -180,7 +185,7 @@
   padding: 0;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.5rem;
   overflow: hidden;
 }
@@ -264,7 +269,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .fab-button:hover {
@@ -284,7 +289,7 @@ textarea {
 .payment-method-item {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .category-name,
