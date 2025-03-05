@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { getPaymentMethods, createPaymentMethod, deletePaymentMethod } from '../services/paymentMethodService';
-import Modal from './Modal';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import {
+  getPaymentMethods,
+  createPaymentMethod,
+  deletePaymentMethod,
+} from "../services/paymentMethodService";
+import Modal from "./Modal";
 
 export default function PaymentMethodList() {
   const { auth } = useAuth();
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [showNewForm, setShowNewForm] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    lastDigits: ''
+    name: "",
+    lastDigits: "",
   });
 
   useEffect(() => {
@@ -23,19 +27,23 @@ export default function PaymentMethodList() {
       const updatedMethods = await getPaymentMethods(auth);
       setPaymentMethods(updatedMethods);
       setShowNewForm(false);
-      setFormData({ name: '', lastDigits: '' });
+      setFormData({ name: "", lastDigits: "" });
     } catch (error) {
-      console.error('Failed to create payment method:', error);
+      console.error("Failed to create payment method:", error);
     }
   };
 
   const handleDelete = async (methodId) => {
-    if (window.confirm('Are you sure you want to delete this payment method?')) {
+    if (
+      window.confirm("Are you sure you want to delete this payment method?")
+    ) {
       try {
         await deletePaymentMethod(auth, methodId);
-        setPaymentMethods(paymentMethods.filter(method => method.id !== methodId));
+        setPaymentMethods(
+          paymentMethods.filter((method) => method.id !== methodId)
+        );
       } catch (error) {
-        console.error('Failed to delete payment method:', error);
+        console.error("Failed to delete payment method:", error);
       }
     }
   };
@@ -43,16 +51,24 @@ export default function PaymentMethodList() {
   return (
     <div className="payment-method-list">
       <h2>Payment Methods</h2>
-      <button className="fab-button" onClick={() => setShowNewForm(true)}>+</button>
-      
+      <button
+        className="fab-button"
+        aria-label="Ajouter une nouvelle méthode de paiement"
+        onClick={() => setShowNewForm(true)}
+      >
+        +
+      </button>
+
       <div className="payment-methods">
-        {paymentMethods.map(method => (
+        {paymentMethods.map((method) => (
           <div key={method.id} className="payment-method-item">
             <div className="method-content">
               <div className="method-name">{method.name}</div>
-              <div className="method-digits">**** **** **** {method.lastDigits}</div>
+              <div className="method-digits">
+                **** **** **** {method.lastDigits}
+              </div>
             </div>
-            <button 
+            <button
               className="delete-button"
               onClick={() => handleDelete(method.id)}
               aria-label={`Delete ${method.name} payment method`}
@@ -73,7 +89,7 @@ export default function PaymentMethodList() {
             type="text"
             placeholder="Method Name"
             value={formData.name}
-            onChange={e => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
           <input
@@ -82,7 +98,9 @@ export default function PaymentMethodList() {
             value={formData.lastDigits}
             pattern="\d{4}"
             maxLength="4"
-            onChange={e => setFormData({...formData, lastDigits: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, lastDigits: e.target.value })
+            }
             required
           />
           <button type="submit">Create Payment Method</button>
